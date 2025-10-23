@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Card, Row, Col, Container } from "react-bootstrap";
-import {H1, ButtonGet} from '../Styles/PagGetEventos.js'
+import {H1, ButtonGet} from '../Styles/PagGetItens'
 
 import '../Styles/PagEventos.css'
 

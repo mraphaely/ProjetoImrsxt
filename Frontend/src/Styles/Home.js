@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 export const Caixa = styled.div`   
 display: flex;
-background-color: #000;
+background-color: #fff;
 margin: 0px !important;
 flex-wrap: nowrap;
 flex-direction: column;
 align-items: center;
 height: 150vh;
+border-top: 3px #B91C1C solid;
 `
 //CAIXA 1 ============================================
 
@@ -197,7 +198,7 @@ margin-left: 60px !important;
 border-radius: 10px;
 height: 63px !important;
 text-decoration: none;
-&: hover{
+&:hover{
         color: #fff;
         background-color:#AD6CFF;
     }

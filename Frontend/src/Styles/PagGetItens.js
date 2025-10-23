@@ -7,30 +7,30 @@ display:grid !important;
 display: grid; grid-template-columns: repeat(3, 1fr) !important;
 gap: 10px !important; /* Espaçamento entre as colunas */
 height:65vh;
-background-color:#000 ;
+background-color: #fff ;
 padding:30px 90px !important ;
 `
 
 export const Caixa2 = styled.div`   
-background-color:#000 ;
+background-color: #fff ;
 margin: 0 ;
 
 `
 
 export const CaixaH1 = styled.div`  
-background-color:#000 ;
+background-color: #fff ;
 margin: 0;
 `
 
 export const H1 = styled.h1`
 font-family: Arial, Helvetica, sans-serif;
-color: #fff;
+color: #000;
 margin-right:190px;
 margin-bottom:45px;
 font-size: 32px;
 `
 export const ButtonGet = styled(Link)`
-heigth: auto;
+height: auto;
 border: 'none';
 color: '#fff';
 font-size: '20px'; 

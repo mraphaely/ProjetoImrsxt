@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import {Caixa} from '../Styles/App.js'
 
+//Navbar e Rodapé
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 
@@ -13,11 +14,13 @@ import Register from "../Components/Register";
 
 //rotas da pag Home
 import PagAddEventos from "../Components/PagAddEventos";
-import PagAddEventosEmpreendedorismo from "../Components/PagEventosEmpreendedorismo";
 import PagAddEventosGeral from "../Components/PagEventosGeral";
-import PagAddEventosTec from "../Components/PagEventosTecnologia";
 
-import SelecionarEvento from '../Components/SelecionarEvento'
+//rotas da pag Home User navbar
+import Carrinho from "../Components/Carrinho";
+import Pagamento from "../Components/Pagamento";
+import Acompanhamento from "../Components/Acompanhamento";
+import Historico from "../Components/Historico";
 
 const App = () => {
     return(
@@ -31,11 +34,14 @@ const App = () => {
                 <Route path="login" element={<Login/>} />
                 <Route path="register" element={<Register/>} />
                 <Route path="PagAddEventos" element={<PagAddEventos/>} />
-                <Route path="PagEventosEmpreendedorismo" element={<PagAddEventosEmpreendedorismo/>} />
                 <Route path="PagEventosGeral" element={<PagAddEventosGeral/>} />
-                <Route path="PagEventosTec" element={<PagAddEventosTec/>} />
+                
                 <Route path="PagLogin" element={<Login/>} />
-                <Route path="/selecionarEvento" element={<SelecionarEvento/>} />
+
+                <Route path="Carrinho" element={<Carrinho/>} />
+                <Route path="Pagamento" element={<Pagamento/>} />
+                <Route path="Acompanhamento" element={<Acompanhamento/>} />
+                <Route path="Historico" element={<Historico/>} />
             </Routes>
             <Footer/>
             </Container>

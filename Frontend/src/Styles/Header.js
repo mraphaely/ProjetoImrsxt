@@ -1,32 +1,51 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Logo = styled.img`
-width:130px !important;
-margin-left: 90px !important;
-`
-export const Caixa =  styled.div`
-display: flex;
-background-color:#000;
-left: 0;
-right: 0;
-justify-content: space-between;
-align-items:center
+max-width: 90px !important;
+max-height: 90px;
+margin: 10px;
+border-radius: 150px;
+
+ object-fit: contain;
+
+  @media (max-width: 576px) {
+    width: 45px;
+  }
 `
 
+export const Caixa = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-export const Btns = styled.span`
-display: flex;
-cursor: pointer;
-padding-right: 120px !important;
-`
-export const LinkStyled = styled(Link)`
-    font-size: 24px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-decoration: none;
-    padding: 0px 25px !important;
-    color: #fff;
-    &:hover{
-        color: #AD6CFF;
-    }
-`
+  @media (max-width: 992px) {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+`;
+
+export const LinkStyled = styled(NavLink)`
+  color: #7a2b2b;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  margin: 0 8px;
+
+  &.active {
+    font-weight: 700; /* deixa em negrito */
+    color: #c92a2a; /* cor diferenciada */
+    border-bottom: 2px solid #c92a2a;
+    padding-bottom: 2px;
+  }
+
+  &:hover {
+    color: #c92a2a;
+  }
+
+  @media (max-width: 576px) {
+    display: block;
+    padding: 8px 0;
+  }
+`;
