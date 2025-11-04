@@ -4,7 +4,7 @@ export const PagamentoBox = styled.div`
   background-color: #fff4f4;
   border: 1px solid #d9534f;
   border-radius: 8px;
-  padding: 40px; 
+  padding: 50px !important; 
   width: 100%;
   max-width: 700px;
 
@@ -20,13 +20,13 @@ export const PagamentoBox = styled.div`
 
 export const Title = styled.h2`
   text-align: center;
-  color: #a52828;
+  color: #000;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin: 28px 0px 28px 0px !important;
 `;
 
 export const Obs = styled.p`
-  text-align: center;
+  text-align: start;
   color: #555;
   font-size: 14px;
   margin-bottom: 20px;

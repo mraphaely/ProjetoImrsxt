@@ -1,20 +1,22 @@
 import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { PagamentoBox, Endereco, Title, Obs, BotoesContainer } from "../Styles/Pagamento";
+import '../index.css'
+import iconLocal from "../../public/localizacao.png";
 
 const Pagamento = () => {
   const [forma, setForma] = useState("");
 
   return (
+    <>
+    <Title>Pagamento</Title>
     <Container fluid className="my-5 d-flex justify-content-center px-3">
   <PagamentoBox>
-    <Title>Pagamento</Title>
-    <Obs>Obs: o pagamento é feito no local de retirada</Obs>
 
     <Form>
-      {/* Forma de pagamento */}
       <Form.Group className="mb-4">
         <Form.Label style={{fontWeight: "bold"}}>Escolha forma de pagamento:</Form.Label>
+    <Obs>Obs: o pagamento é feito no local de retirada</Obs>
         <div className="d-flex flex-column gap-2 mt-2">
           {["Pix", "Crédito", "Débito", "Dinheiro"].map((opcao, index) => (
             <label
@@ -40,18 +42,17 @@ const Pagamento = () => {
         </div>
       </Form.Group>
 
-      {/* Endereço */}
       <Form.Group className="mb-4">
         <Form.Label style={{fontWeight:"bold"}}>Endereço:</Form.Label>
         <Endereco>
           <i className="bi bi-geo-alt-fill"></i>
           <span>
+            <img src={iconLocal} style={{width: '40px'}} alt="icon" />
             R. B. B. H, 73 - Benedito Bentes, Maceió - AL, 57086-173
           </span>
         </Endereco>
       </Form.Group>
 
-      {/* Nome e número do cliente*/}
       <Form.Group className="mb-3">
         <Form.Label style={{fontWeight:"bold"}}>Nome:</Form.Label>
         <Form.Control type="text" placeholder="Digite seu nome" required />
@@ -64,10 +65,10 @@ const Pagamento = () => {
 
       {/* Botões */}
     <BotoesContainer>
-  <Button variant="outline-secondary" href="/Carrinho">
+  <Button variant="outline-secondary" href="/Carrinho" className="ButtonPagament">
     Voltar ao carrinho
   </Button>
-  <Button variant="danger" type="submit">
+  <Button variant="danger" type="submit" className="ButtonPagament">
     Confirmar Pedido
   </Button>
 </BotoesContainer>
@@ -75,6 +76,7 @@ const Pagamento = () => {
     </Form>
   </PagamentoBox>
 </Container>
+</>
   );
 };
 

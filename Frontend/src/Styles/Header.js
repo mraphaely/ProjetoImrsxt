@@ -34,8 +34,8 @@ export const LinkStyled = styled(NavLink)`
   margin: 0 8px;
 
   &.active {
-    font-weight: 700; /* deixa em negrito */
-    color: #c92a2a; /* cor diferenciada */
+    font-weight: 700; 
+    color: #c92a2a; 
     border-bottom: 2px solid #c92a2a;
     padding-bottom: 2px;
   }
