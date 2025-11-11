@@ -5,11 +5,13 @@ export const PagamentoBox = styled.div`
   border: 1px solid #d9534f;
   border-radius: 8px;
   padding: 50px !important; 
-  width: 100%;
+  width: 80%;
   max-width: 700px;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin: 0 auto; 
   gap: 20px;
 
   @media (max-width: 768px) {

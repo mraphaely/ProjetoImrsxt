@@ -5,8 +5,6 @@ import '../index.css'
 
 function Carrinho() {
   const [itens, setItens] = useState([
-    // 🔹 Você pode começar vazio para testar:
-    // Exemplo: []
     {
       id: 1,
       nome: "Churro crocante recheado com doce de leite",
@@ -54,7 +52,6 @@ function Carrinho() {
     <Container className="my-5 px-3">
       <h2 className="fw-bold mb-4 text-center">Carrinho de Compras</h2>
 
-      {/* ✅ Se o carrinho estiver vazio */}
       {itens.length === 0 ? (
         <div className="text-center py-5">
           <CartX size={80} className="text-danger mb-3" />
@@ -70,7 +67,6 @@ function Carrinho() {
         </div>
       ) : (
         <>
-          {/* 🧺 Lista de itens */}
           {itens.map((item) => (
             <Card
               key={item.id}

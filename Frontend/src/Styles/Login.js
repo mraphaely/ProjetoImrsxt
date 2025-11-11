@@ -2,100 +2,156 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const CaixaLogin = styled.div`
-  display: flex;
-  background-color: #000;
-  height: 80vh;
-  flex-direction: row;
-  justify-content: center;
+  display: flex !important;
+  justify-content: center !important;
   align-items: center;
-`;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #fff5f0 0%, #ffe9e3 100%);
+  font-family: "Poppins", sans-serif;
+  padding: 0 60px;
+  gap: 90px;
 
-export const Caixinha1 = styled.div`
-  margin: 30px 0px;
-  width: 485.32px;
-  border-radius: 10px 0px 0px 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 551.5px;
-  background: linear-gradient(0deg, #5A00CB 0%, #2D0065 100%);
-`;
-
-export const Caixinha2 = styled.form`
-  width: 485.32px;
-  margin: 30px 0px;
-  height: 551.5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background-image: url('../imgs/image7.png'); */
-  background-size: cover;
-  background-position: center;
-`;
-
-export const Btn = styled(Link)`
-  align-items: center;
-  text-decoration: none;
-  display: flex;
-  width: 200px;
-  justify-content: center;
-  font-size: 18px;
-  padding: 6px !important;
-  background-color: rgba(255, 255, 255, 0.29);
-  border-radius: 10px;
-  cursor: pointer;
-  color: #fff;
-  &:hover {
-    background-color: #ad6cff;
-    color: #fff;
+  @media (max-width: 992px) {
+    flex-direction: column;
+    gap: 50px;
+    height: auto;
+    padding: 60px 20px;
   }
 `;
 
-export const Btn2 = styled.button`
-  color: #fff;
+export const ImagemBox = styled.div`
   display: flex;
-  width: 200px;
-  justify-content: center;
-  font-size: 18px;
-  text-decoration: none;
-  background: linear-gradient(0deg, #5A00CB 0%, #2D0065 100%);
-  padding: 6px !important;
-  border-radius: 10px;
-  cursor: pointer;
-  &:hover {
-    background: linear-gradient(0deg, #2D0065 0%, #5A00CB 100%);
-    color: #fff;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+
+  img {
+    width: 85%;
+    max-width: 450px !important;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  }
+
+  @media (max-width: 992px) {
+    justify-content: center;
+    img {
+      width: 70%;
+      max-width: 320px;
+    }
   }
 `;
 
-export const LabelsInputs = styled.div`
+export const FormBox = styled.form`
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #c03a2bab;
+  padding: 55px 65px !important;
+  width: 100% ;
+  max-width: 420px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-`;
+  justify-content: center;
+  transition: all 0.3s ease;
 
-export const Label = styled.label`
-  color: #fff;
-  font-size: 20px;
-`;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
 
-export const Input = styled.input`
-  width: 350px;
-  height: 34px;
-  border-radius: 0px 10px 10px 10px;
-  margin-bottom: 35px !important;
+  @media (max-width: 992px) {
+    padding: 40px 30px;
+    max-width: 90%;
+  }
 `;
 
 export const H1 = styled.h1`
-  color: #fff;
-  margin-bottom: 40px !important;
-  font-size: 24px;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1c1c1c;
+  text-align: start;
+  margin-bottom: 8px;
 `;
 
-export const P = styled.p`
+export const Subtitulo = styled.p`
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 35px;
+`;
+
+export const Label = styled.label`
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 6px;
+`;
+
+export const Input = styled.input`
+  border: 1.8px solid #f1d2c3;
+  border-radius: 10px;
+  padding: 12px 16px;
+  background-color: #fff;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 22px;
+  transition: 0.2s ease-in-out;
+
+  padding: 7px 18px 7px 18px !important;
+
+  &:focus {
+    border-color: #c0392b;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(192, 57, 43, 0.1);
+  }
+`;
+
+export const BtnEntrar = styled.button`
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  border: none;
   color: #fff;
-  width: 250px;
-  margin-bottom: 40px !important;
-  font-size: 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
+
+  padding: 7px 18px 7px 18px !important;
+  margin-top: 28px !important;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #a93226, #cf3e2f);
+    box-shadow: 0 6px 18px rgba(192, 57, 43, 0.35);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+export const LinkEsqueci = styled(Link)`
+  color: #c0392b;
+  font-size: 0.9rem;
+  text-align: right;
+  text-decoration: none;
+  display: block;
+  margin-top: 18px;
+  border: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const Mensagem = styled.p`
+  color: #c0392b;
+  margin-top: 18px;
+  text-align: center;
+  font-weight: 500;
 `;

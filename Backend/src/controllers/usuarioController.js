@@ -1,85 +1,107 @@
-import Usuario from "../models/usuarioModel.js";
-import conn from "../config/conn.js";
-import { z } from 'zod';
+import Produto from "../models/produtoModel.js";
+import Pedido from "../models/usuarioModel.js";
+import { z } from "zod";
 
-//helpers
-import createUserToken from "../helper/create-user-token.js";
-import getToken from "../helper/get-token.js";
-import getUserByToken from "../helper/get-user-by-token.js";
-import Inscricao from "../models/inscricaoModel.js";
 
-const createSchema = z.object({
-    email: z.string({
-        invalid_type_error: "O titulo do evento deve ser um texto",
-        required_error: "Titulo é obrigatório"
-    }),
-    quantidade_ingresso: z.string({
-        invalid_type_error: "O local do evento deve ser um texto",
-        required_error: "Local é obrigatório"
-    }),
+const compraSchema = z.object({
+  nomeCliente: z.string().min(2, "O nome é obrigatório."),
+  telefone: z.string().optional(), 
+  itens: z.array(z.object({
+    produtoId: z.string({ required_error: "Produto é obrigatório." }),
+    quantidade: z.number().min(1, "A quantidade deve ser pelo menos 1."),
+  })),
 });
 
-export const create = async (request, response) => {
-  const { email, senha, verifica_senha } = request.body;
 
+export const getCardapio = async (request, response) => {
   try {
-    if (senha != verifica_senha) {
-      response.status(404).json({ message: "As senhas devem ser iguais" });
-    } else {
-      await Usuario.create({ email, senha, verifica_senha });
-      response.status(201).json({ mensagem: "Usuário cadastrado com sucesso" });
+    const produtos = await Produto.findAll({
+      where: { disponibilidade: "Disponível" },
+      order: [["createdAt", "DESC"]],
+    });
+
+    if (!produtos || produtos.length === 0) {
+      return response.status(404).json({ message: "Nenhum produto disponível no momento." });
     }
+
+    return response.status(200).json(produtos);
   } catch (error) {
-    response.status(500).json(error);
+    console.error(error);
+    return response.status(500).json({ message: "Erro ao buscar o cardápio." });
   }
 };
 
-export const login = async (request, response) => {
-  const { email, senha } = request.body;
 
+export const finalizarCompra = async (request, response) => {
   try {
-    const usuario = await Usuario.findOne({ where: { email } });
-    if (!usuario) {
-      response.status(400).json({ err: "Usuário não encontrado" });
-      return;
+    const validation = compraSchema.safeParse(request.body);
+    if (!validation.success) {
+      return response.status(400).json(validation.error);
     }
 
-    const verificaSenha = await Usuario.findByPk(usuario.id);
-    if (verificaSenha.senha !== senha) {
-      response.status(400).json({ err: "Senha não confere" });
-      return;
+    const { nomeCliente, telefone, itens } = validation.data;
+
+    let valorTotal = 0;
+    const produtosComprados = [];
+
+    for (const item of itens) {
+      const produto = await Produto.findByPk(item.produtoId);
+
+      if (!produto) {
+        return response.status(404).json({ message: `Produto ${item.produtoId} não encontrado.` });
+      }
+
+      if (produto.estoque < item.quantidade) {
+        return response.status(400).json({ message: `Estoque insuficiente para o produto: ${produto.nome}` });
+      }
+
+      // Atualiza o estoque
+      produto.estoque -= item.quantidade;
+      await produto.save();
+
+      const subtotal = produto.preco * item.quantidade;
+      valorTotal += subtotal;
+
+      produtosComprados.push({
+        produto: produto.nome,
+        quantidade: item.quantidade,
+        precoUnitario: produto.preco,
+        subtotal,
+      });
     }
 
-    createUserToken(usuario, request, response);
+    // Cria o pedido e gera ID
+    const novoPedido = await Pedido.create({
+      nomeCliente,
+      telefone: telefone || null,
+      valor_total: valorTotal.toFixed(2),
+      itens: JSON.stringify(produtosComprados),
+    });
+
+    return response.status(201).json({
+      message: "Compra finalizada com sucesso!",
+      pedido: novoPedido,
+      pedidoId: novoPedido.id, // o ID serve para consultar histórico
+    });
   } catch (error) {
     console.error(error);
-    response.status(500).json({ message: "Erro ao fazer login" });
+    return response.status(500).json({ message: "Erro ao finalizar compra." });
   }
 };
 
-// export const logout = async (request, response) => {
-//   response.status(200).json({ message: "Logout realizado com sucesso." });
-// };
-
-export const inscricao = async (request, response) => {
+export const getHistoricoPedidos = async (request, response) => {
   try {
-    const createValidation = createSchema.safeParse(request.body);
-    if (!createValidation.success) {
-      return response.status(400).json(createValidation.error);
+    const pedidos = await Pedido.findAll({
+      order: [["createdAt", "DESC"]],
+    });
+
+    if (!pedidos || pedidos.length === 0) {
+      return response.status(404).json({ message: "Nenhum pedido encontrado." });
     }
 
-    const { email, quantidade_ingresso  } = createValidation.data;
-    const usuario = await Usuario.findOne({ where: { email } });
-    if (!usuario) {
-      response.status(400).json({ err: "Usuário não encontrado" });
-      return;
-    }
-
-    const inscricao = { email, quantidade_ingresso };
-    const addIncricao = await Inscricao.create(inscricao);
-        response.status(201).json({ message: "Inscrição adicionada com sucesso!", addIncricao });
+    return response.status(200).json(pedidos);
   } catch (error) {
     console.error(error);
-    response.status(500).json({ message: "Erro ao fazer inscrição" });
+    return response.status(500).json({ message: "Erro ao buscar histórico de pedidos." });
   }
 };

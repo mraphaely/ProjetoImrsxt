@@ -15,9 +15,12 @@ const Historico = ({ tipo, pedido }) => {
     );
   }
 
-  // Renderização principal (sem título interno)
+
   return (
+    <>
+    
     <PedidoBox borderColor={tipo === "acompanhamento" ? "#a33" : "#2358c9"}>
+    
       <PedidoInfo>
         {tipo === "acompanhamento" ? (
           <>
@@ -39,6 +42,7 @@ const Historico = ({ tipo, pedido }) => {
         )}
       </PedidoInfo>
     </PedidoBox>
+</>
   );
 };
 

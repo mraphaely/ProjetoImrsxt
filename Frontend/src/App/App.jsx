@@ -10,7 +10,6 @@ import Header from "../Components/Header";
 import Home from "../Components/Home";
 import Contato from "../Components/Contato";
 import Login from "../Components/Login";
-import Register from "../Components/Register";
 import PagAddEventos from "../Components/PagAddEventos";
 import PagAddEventosGeral from "../Components/PagEventosGeral";
 import Carrinho from "../Components/Carrinho";
@@ -29,7 +28,6 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="contato" element={<Contato />} />
               <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
               <Route path="PagAddEventos" element={<PagAddEventos />} />
               <Route path="PagEventosGeral" element={<PagAddEventosGeral />} />
               <Route path="Carrinho" element={<Carrinho />} />

@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 export const Logo = styled.img`
-max-width: 90px !important;
-max-height: 90px;
+max-width: 50px !important;
+max-height: 50px;
 margin: 10px;
 border-radius: 150px;
 

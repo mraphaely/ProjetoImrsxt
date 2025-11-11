@@ -1,16 +1,17 @@
 import { Router } from "express";
-import { inscricao, login, create } from "../controllers/usuarioController.js";
-
-//middleware
-import verifyToken from "../middleware/verify-token.js";
+import {
+  getCardapio,
+  finalizarCompra,
+  getHistoricoPedidos,
+} from "../controllers/usuarioController.js";
 
 const router = Router();
 
-router.post("/cadastro", create);
-router.post("/login", login);
-router.post("/inscricao", inscricao);
+//Cardápio (lista de produtos)
+router.get("/cardapio", getCardapio);
 
-// router.get("/logout",verifyToken, logout);
+router.post("/comprar", finalizarCompra);
 
+router.get("/historico", getHistoricoPedidos);
 
 export default router;

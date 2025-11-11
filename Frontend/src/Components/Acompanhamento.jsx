@@ -1,13 +1,12 @@
 import "../index.css"
 import { useState } from "react";
 import PedidoStatus from "./Historico";
-import { PageWrapper, TituloPagina } from "../Styles/PedidoStyles";
-import { Container,  CaixaConteudo } from "../Styles/PedidoStyles";
+import { PageWrapper, TituloPagina, Container,  CaixaConteudo } from "../Styles/PedidoStyles";
 
 const Acompanhamento = () => {
   const [activeTab] = useState("acompanhamento");
 
-  // 🔹 Dados simulados — substituir futuramente por fetch/API
+  // Dados simulados — substituir futuramente por fetch/API
   const pedidoAtivo = {
     id: "order_uf8a7f8c0",
     cliente: "Maria Eduarda",

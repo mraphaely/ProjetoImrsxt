@@ -1,31 +1,28 @@
 import { DataTypes } from "sequelize";
 import conn from "../config/conn.js";
 
-const Pedido = conn.define("Pedido", {
+const Admin = conn.define("Admin", {
   id: {
     type: DataTypes.UUID,
-    primaryKey: true,
     defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
   },
-  nomeCliente: {
+  nome: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  telefone: {
+  usuario: {
     type: DataTypes.STRING,
-    allowNull: true,
-  },
-  valor_total: {
-    type: DataTypes.FLOAT,
     allowNull: false,
+    unique: true,
   },
-  itens: {
-    type: DataTypes.JSON, 
+  senha: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
-  tableName: "pedidos",
-  timestamps: true, // createdAt e updatedAt
+  tableName: "admins",
+  timestamps: true,
 });
 
-export default Pedido;
+export default Admin;

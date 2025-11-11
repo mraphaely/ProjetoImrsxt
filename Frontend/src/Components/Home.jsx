@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { SectionTitle, PageWrapper, StyledCard, CardImage, CardBody, CardTitle, CardText, AddButton } from "../Styles/Cardapio";
@@ -9,7 +9,7 @@ const Cardapio = () => {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await axios.get("http://localhost:3333/itens/listar");
+        const response = await axios.get("http://localhost:3333/produtos/listar");
         if (response.data && Array.isArray(response.data.eventos)) {
           setProdutos(response.data.eventos);
         } else {

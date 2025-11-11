@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Nav } from "react-bootstrap";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 85%;
   max-width: 1200px;
   margin: 0 auto; 
   padding: 2rem 2rem !important; 
@@ -99,9 +99,10 @@ export const PedidoBox = styled.div`
   //border: 1.5px solid;
   border-radius: 8px;
   padding: 1.5rem !important;
+  width: 80%;
   background-color: #fefaf6;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  margin: 20px;
+  margin: 0 auto;
 
   h5 {
     font-weight: 600;

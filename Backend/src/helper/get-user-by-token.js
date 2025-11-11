@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Usuario from "../models/usuarioModel.js";
+import Usuario from "../models/adminModel.js";
 import { literal } from "sequelize";
 
 const getUserByToken = async (token) => {
