@@ -105,7 +105,8 @@ const Login = () => {
                 </>
               ) : (
                 <>
-                  <H1>Recuperar Senha</H1>
+                  <H1>Problemas para entrar?</H1>
+                  <h6>Recuperar Senha</h6>
                   <p>Digite seu e-mail para receber as instruções</p>
 
                   <Form.Group className="mb-3">

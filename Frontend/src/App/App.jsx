@@ -8,10 +8,8 @@ import Header from "../Components/Header";
 
 // Páginas
 import Home from "../Components/Home";
-import Contato from "../Components/Contato";
 import Login from "../Components/Login";
-import PagAddEventos from "../Components/PagAddEventos";
-import PagAddEventosGeral from "../Components/PagEventosGeral";
+import GerenciarCardapio from "../Components/GerenciarCardapio.jsx";
 import Carrinho from "../Components/Carrinho";
 import Pagamento from "../Components/Pagamento";
 import Acompanhamento from "../Components/Acompanhamento";
@@ -26,10 +24,8 @@ const App = () => {
           <Container className="py-4">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="contato" element={<Contato />} />
               <Route path="login" element={<Login />} />
-              <Route path="PagAddEventos" element={<PagAddEventos />} />
-              <Route path="PagEventosGeral" element={<PagAddEventosGeral />} />
+              <Route path="GerenciarCardapio" element={<GerenciarCardapio />} />
               <Route path="Carrinho" element={<Carrinho />} />
               <Route path="Pagamento" element={<Pagamento />} />
               <Route path="Acompanhamento" element={<Acompanhamento />} />
