@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 85%;
   max-width: 1200px;
   margin: 0 auto; 
-  padding: 2rem 2rem !important; 
+  padding: 0.5rem; 
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ export const Container = styled.div`
 export const CaixaConteudo = styled.div`
   background-color: #fff;
   border-radius: 12px;
-  padding: 2rem !important;
+  padding: 1rem;
   width: 100%;
   max-width: 800px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
@@ -66,8 +66,11 @@ export const CaixaConteudo = styled.div`
 
 export const PageWrapper = styled.div`
   background-color: #fff;
-  min-height: 100vh;
+  min-height: calc(100vh - 150px);
+  padding-top: 120px;
   padding-bottom: 2rem;
+
+
 `;
 
 export const NavStyled = styled(Nav)`

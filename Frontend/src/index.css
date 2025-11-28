@@ -1,19 +1,7 @@
-*{
-    margin: 0 ;
-    padding:0 !important;
-    max-width: 30000px !important;
-}
-
-.logoTxt{
-    padding-right: 40% !important;
-}
-
-#card{
-    padding: 28px !important;
-}
-
-#card2{
-    padding: 28px !important;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .ButtonPagament{
@@ -21,6 +9,6 @@
     margin-top: 28px !important
 }
 
-#CaixaAcompanhamento{
-    margin: 50px !important;
-}
+
+
+

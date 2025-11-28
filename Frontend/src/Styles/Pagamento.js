@@ -4,10 +4,9 @@ export const PagamentoBox = styled.div`
   background-color: #fff4f4;
   border: 1px solid #d9534f;
   border-radius: 8px;
-  padding: 50px !important; 
   width: 80%;
   max-width: 700px;
-
+  padding: 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;

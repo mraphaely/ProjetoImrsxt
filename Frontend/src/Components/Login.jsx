@@ -14,7 +14,8 @@ import {
   Mensagem
 } from "../Styles/Login.js";
 import imgLogin from "../../public/mocotelainicial.png"; 
-
+import pngCadeado from "../../public/cadeado.png";  
+ 
 const Login = () => {
   const [cpf, setCpf] = useState("");
   const [senha, setSenha] = useState("");
@@ -36,7 +37,7 @@ const Login = () => {
         setMensagem("E-mail de recuperação enviado com sucesso!");
         setEmailRecuperacao("");
       } else {
-        const res = await axios.post("http://localhost:3333/admin/login", {
+        const res = await axios.post("http://localhost:3333/login", {
           cpf,
           senha,
         });
@@ -61,7 +62,7 @@ const Login = () => {
           {/* Lado esquerdo com imagem */}
           <Col md={6} className="d-flex justify-content-center mb-4 mb-md-0">
             <ImagemBox>
-              <img src={imgLogin} alt="login ilustrativo" />
+              <img src={imgLogin} alt="login" />
             </ImagemBox>
           </Col>
 
@@ -105,7 +106,10 @@ const Login = () => {
                 </>
               ) : (
                 <>
-                  <H1>Problemas para entrar?</H1>
+                 <ImagemBox>
+                  <img src={pngCadeado} style={{height: "50%", width: "auto"}} alt="CadeadoErr" />
+                 </ImagemBox>
+                 <H1>Problemas para entrar?</H1>
                   <h6>Recuperar Senha</h6>
                   <p>Digite seu e-mail para receber as instruções</p>
 

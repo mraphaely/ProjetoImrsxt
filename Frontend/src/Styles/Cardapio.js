@@ -3,7 +3,6 @@ import { Card, Button } from "react-bootstrap";
 
 export const PageWrapper = styled.div`
   background-color: #fff;
-  padding: 40px 20px;
   min-height: 100vh;
 `;
 

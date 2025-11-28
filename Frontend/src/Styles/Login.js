@@ -22,7 +22,7 @@ export const CaixaLogin = styled.div`
 
 export const ImagemBox = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   flex: 1;
 
@@ -46,9 +46,9 @@ export const FormBox = styled.form`
   background-color: #ffffff;
   border-radius: 16px;
   border: 1px solid #c03a2bab;
-  padding: 55px 65px !important;
+  padding: 55px 65px;
   width: 100% ;
-  max-width: 420px !important;
+  max-width: 420px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -97,7 +97,7 @@ export const Input = styled.input`
   margin-bottom: 22px;
   transition: 0.2s ease-in-out;
 
-  padding: 7px 18px 7px 18px !important;
+  padding: 7px 18px 7px 18px ;
 
   &:focus {
     border-color: #c0392b;

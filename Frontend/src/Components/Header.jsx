@@ -45,7 +45,7 @@ const Header = () => {
         <hr className="linhaNav m-0" />
       </Navbar>
 
-      <div style={{ height: "110px" }}></div>
+      <div style={{ height: "100px" }}></div>
     </>
   );
 };
