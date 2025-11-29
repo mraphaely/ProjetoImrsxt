@@ -13,12 +13,12 @@ import {
 
 const router = Router();
 
-// Autenticação do gestor
+// Autenticação
 router.post("/registrar", registrarAdmin);
 router.post("/login", loginAdmin);
 router.post("/logout", logoutAdmin);
 
-// CRUD de produtos
+
 router.post("/produtos", imageUpload.single("imagem"), criarProduto);
 router.get("/produtos", listarProdutos);
 router.get("/produtos/:id", getProduto);

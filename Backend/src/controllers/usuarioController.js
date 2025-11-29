@@ -81,7 +81,7 @@ export const finalizarCompra = async (request, response) => {
     return response.status(201).json({
       message: "Compra finalizada com sucesso!",
       pedido: novoPedido,
-      pedidoId: novoPedido.id, // o ID serve para consultar histórico
+      pedidoId: novoPedido.id, //ID para consultar histórico
     });
   } catch (error) {
     console.error(error);

@@ -1,7 +1,7 @@
 import Produto from "../models/produtoModel.js";
 import { z } from "zod";
 
-// ✅ Esquema de validação para criar produto
+// validação
 const createSchema = z.object({
     nome: z.string({
         invalid_type_error: "O nome do produto deve ser um texto",
@@ -26,15 +26,15 @@ const createSchema = z.object({
     })
 });
 
-// ✅ Validação de ID
+
 const idSchema = z.object({
     id: z.string().uuid({ message: "ID inválido" })
 });
 
-// ✅ Schema de atualização (igual ao de criação, mas campos opcionais)
+
 const updateSchema = createSchema.partial();
 
-// ✅ POST -> criar produto
+
 export const create = async (request, response) => {
     const createValidation = createSchema.safeParse(request.body);
     if (!createValidation.success) {
@@ -59,7 +59,7 @@ export const create = async (request, response) => {
     }
 };
 
-// ✅ GET -> listar produtos com paginação
+
 export const getProdutos = async (request, response) => {
     const page = parseInt(request.query.page) || 1;
     const limit = parseInt(request.query.limit) || 10;
@@ -84,7 +84,7 @@ export const getProdutos = async (request, response) => {
     }
 };
 
-// ✅ GET -> buscar produto por ID
+
 export const getProduto = async (request, response) => {
     const idValidation = idSchema.safeParse(request.params);
     if (!idValidation.success) {
@@ -106,7 +106,7 @@ export const getProduto = async (request, response) => {
     }
 };
 
-// ✅ PUT -> atualizar produto
+
 export const updateProduto = async (request, response) => {
     const idValidation = idSchema.safeParse(request.params);
     if (!idValidation.success) {
@@ -140,7 +140,7 @@ export const updateProduto = async (request, response) => {
     }
 };
 
-// ✅ DELETE -> deletar produto
+
 export const deleteProduto = async (request, response) => {
     const idValidation = idSchema.safeParse(request.params);
     if (!idValidation.success) {

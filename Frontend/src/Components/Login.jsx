@@ -17,7 +17,7 @@ import imgLogin from "../../public/mocotelainicial.png";
 import pngCadeado from "../../public/cadeado.png";  
  
 const Login = () => {
-  const [cpf, setCpf] = useState("");
+  const [user, setUser] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,13 +32,13 @@ const Login = () => {
 
     try {
       if (modoRecuperar) {
-        // Simula envio de e-mail de recuperação
+        // Simula envio de e-mail p recuperação
         await new Promise((resolve) => setTimeout(resolve, 1200));
         setMensagem("E-mail de recuperação enviado com sucesso!");
         setEmailRecuperacao("");
       } else {
         const res = await axios.post("http://localhost:3333/login", {
-          cpf,
+          user,
           senha,
         });
         console.log(res.data);
@@ -48,7 +48,7 @@ const Login = () => {
     } catch (error) {
       console.error(error);
       setMensagem(
-        modoRecuperar ? "Erro ao enviar e-mail." : "CPF ou senha incorretos!"
+        modoRecuperar ? "Erro ao enviar e-mail." : "Usuário ou senha incorretos!"
       );
     } finally {
       setLoading(false);
@@ -75,12 +75,12 @@ const Login = () => {
                   <p>Faça login para continuar</p>
 
                   <Form.Group className="mb-3">
-                    <Label>CPF</Label>
+                    <Label>Usuário</Label>
                     <Input
                       type="text"
-                      placeholder="Digite o CPF"
-                      value={cpf}
-                      onChange={(e) => setCpf(e.target.value)}
+                      placeholder="Digite seu usuário"
+                      value={user}
+                      onChange={(e) => setUser(e.target.value)}
                       required
                     />
                   </Form.Group>

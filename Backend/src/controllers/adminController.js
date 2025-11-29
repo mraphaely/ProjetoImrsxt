@@ -9,15 +9,13 @@ const loginSchema = z.object({
   senha: z.string(),
 });
 
-// ============================
-// 🔐 LOGIN / LOGOUT
-// ============================
 
+//LOGIN / LOGOUT
 export const registrarAdmin = async (req, res) => {
   try {
-    const { nome, usuario, senha } = req.body;
+    const { cpf, usuario, senha } = req.body;
 
-    if (!nome || !usuario || !senha) {
+    if (!cpf || !usuario || !senha) {
       return res.status(400).json({ message: "Todos os campos são obrigatórios." });
     }
 
@@ -26,7 +24,7 @@ export const registrarAdmin = async (req, res) => {
       return res.status(400).json({ message: "Usuário já existe." });
     }
 
-    const admin = await Admin.create({ nome, usuario, senha });
+    const admin = await Admin.create({ cpf, usuario, senha });
     return res.status(201).json({ message: "Administrador cadastrado com sucesso!", admin });
   } catch (error) {
     console.error(error);
@@ -65,11 +63,8 @@ export const logoutAdmin = async (req, res) => {
   return res.status(200).json({ message: "Logout realizado com sucesso." });
 };
 
-// ============================
-// 📦 CRUD DE PRODUTOS
-// ============================
-
-// ✅ CREATE
+ 
+//CRUD
 export const criarProduto = async (req, res) => {
   try {
     const { nome, descricao, preco, disponibilidade } = req.body;
@@ -94,7 +89,7 @@ export const criarProduto = async (req, res) => {
   }
 };
 
-// ✅ READ (listar todos)
+
 export const listarProdutos = async (req, res) => {
   try {
     const produtos = await Produto.findAll({ order: [["createdAt", "DESC"]] });
@@ -105,7 +100,7 @@ export const listarProdutos = async (req, res) => {
   }
 };
 
-// ✅ READ (pegar um produto específico)
+
 export const getProduto = async (req, res) => {
   try {
     const { id } = req.params;
@@ -122,7 +117,7 @@ export const getProduto = async (req, res) => {
   }
 };
 
-// ✅ UPDATE
+
 export const atualizarProduto = async (req, res) => {
   try {
     const { id } = req.params;
@@ -144,7 +139,7 @@ export const atualizarProduto = async (req, res) => {
   }
 };
 
-// ✅ DELETE
+
 export const deletarProduto = async (req, res) => {
   try {
     const { id } = req.params;
