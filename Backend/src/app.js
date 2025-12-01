@@ -32,9 +32,9 @@ conn
   .catch((error) => console.error("Erro ao conectar o banco:", error));
 
 
-app.use("/produtos", produtoRouter);   // CRUD do gestor/adm
-app.use("/usuarios", usuarioRouter);   // Cardápio e histórico de pedidos
-app.use("/admin", adminRouter);  // Login/logout e gerenciamento
+app.use("/produtos", produtoRouter);   
+app.use("/usuarios", usuarioRouter); 
+app.use("/admin", adminRouter); 
 
 app.use((req, res) => {
   res.status(404).json({ message: "Rota não encontrada." });

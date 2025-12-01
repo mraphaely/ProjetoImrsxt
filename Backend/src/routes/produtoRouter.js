@@ -1,11 +1,5 @@
 import { Router } from "express";
-import { 
-    create, 
-    getProdutos, 
-    getProduto, 
-    updateProduto, 
-    deleteProduto 
-} from "../controllers/produtoController.js";
+import { create, getProdutos, getProduto, updateProduto, deleteProduto } from "../controllers/produtoController.js";
 import imageUpload from "../helper/image-upload.js";
 
 const router = Router();
@@ -18,3 +12,5 @@ router.put('/:id', imageUpload.single('imagem'), updateProduto);
 router.delete('/:id', deleteProduto); 
 
 export default router;
+
+

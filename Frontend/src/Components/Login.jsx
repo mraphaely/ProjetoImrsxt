@@ -21,7 +21,7 @@ const Login = () => {
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [loading, setLoading] = useState(false);
-  const [modoRecuperar, setModoRecuperar] = useState(false); // alterna entre login e recuperação
+  const [modoRecuperar, setModoRecuperar] = useState(false);
   const [emailRecuperacao, setEmailRecuperacao] = useState("");
   const navigate = useNavigate();
 
@@ -32,7 +32,6 @@ const Login = () => {
 
     try {
       if (modoRecuperar) {
-        // Simula envio de e-mail p recuperação
         await new Promise((resolve) => setTimeout(resolve, 1200));
         setMensagem("E-mail de recuperação enviado com sucesso!");
         setEmailRecuperacao("");
@@ -41,9 +40,12 @@ const Login = () => {
           user,
           senha,
         });
+
         console.log(res.data);
         setMensagem("Login realizado com sucesso!");
-        setTimeout(() => navigate("/admin/dashboard"), 1500);
+
+        // ⬇️ ALTERAÇÃO AQUI
+        setTimeout(() => navigate("/admin/produtos"), 1500);
       }
     } catch (error) {
       console.error(error);
@@ -59,14 +61,13 @@ const Login = () => {
     <CaixaLogin>
       <Container fluid className="d-flex align-items-center justify-content-center">
         <Row className="align-items-center justify-content-center w-100">
-          {/* Lado esquerdo com imagem */}
+        
           <Col md={6} className="d-flex justify-content-center mb-4 mb-md-0">
             <ImagemBox>
               <img src={imgLogin} alt="login" />
             </ImagemBox>
           </Col>
 
-          {/* Lado direito com formulário */}
           <Col md={6} className="d-flex justify-content-center">
             <FormBox onSubmit={handleSubmit}>
               {!modoRecuperar ? (
@@ -106,10 +107,11 @@ const Login = () => {
                 </>
               ) : (
                 <>
-                 <ImagemBox>
-                  <img src={pngCadeado} style={{height: "50%", width: "auto"}} alt="CadeadoErr" />
-                 </ImagemBox>
-                 <H1>Problemas para entrar?</H1>
+                  <ImagemBox>
+                    <img src={pngCadeado} style={{height: "50%", width: "auto"}} alt="CadeadoErr" />
+                  </ImagemBox>
+
+                  <H1>Problemas para entrar?</H1>
                   <h6>Recuperar Senha</h6>
                   <p>Digite seu e-mail para receber as instruções</p>
 
