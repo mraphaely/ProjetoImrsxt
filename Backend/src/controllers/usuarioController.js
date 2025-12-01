@@ -75,13 +75,13 @@ export const finalizarCompra = async (request, response) => {
       nomeCliente,
       telefone: telefone || null,
       valor_total: valorTotal.toFixed(2),
-      itens: JSON.stringify(produtosComprados),
+      itens: produtosComprados,
     });
 
     return response.status(201).json({
       message: "Compra finalizada com sucesso!",
       pedido: novoPedido,
-      pedidoId: novoPedido.id, //ID para consultar histórico
+      pedidoId: novoPedido.id, 
     });
   } catch (error) {
     console.error(error);

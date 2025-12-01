@@ -1,34 +1,68 @@
-import "../index.css"
-import { useState } from "react";
+import "../index.css";
+import { useState, useEffect } from "react";
 import PedidoStatus from "./Historico";
-import { PageWrapper, TituloPagina, Container,  CaixaConteudo } from "../Styles/PedidoStyles";
+import {
+  PageWrapper,
+  TituloPagina,
+  Container,
+  CaixaConteudo,
+} from "../Styles/PedidoStyles";
 
 const Acompanhamento = () => {
   const [activeTab] = useState("acompanhamento");
 
-  // Dados simulados — substituir futuramente por fetch/API
-  const pedidoAtivo = {
-    id: "order_uf8a7f8c0",
-    cliente: "Maria Eduarda",
-    numero: "82 988631814",
-    status: "Em espera",
-    formaPagamento: "Dinheiro",
-    tempoEstimado: "20 minutos",
-  };
+  const [pedidoAtivo, setPedidoAtivo] = useState(null);
+  const [historicoPedido, setHistoricoPedido] = useState(null);
 
-  const historicoPedido = {
-    id: "order_uf8a7f8c0",
-    cliente: "Maria Eduarda",
-    status: "Recebido",
-    data: "01/01/2025, 10:24",
-    total: "R$ 12,00",
-  };
+  const [loading, setLoading] = useState(true);
 
-  const hasPedidoAtivo = true;
-  const hasHistorico = true;
+  useEffect(() => {
+    const fetchPedidos = async () => {
+      try {
+        const resposta = await fetch("http://localhost:3000/api/pedidos/historico");
+        const data = await resposta.json();
+
+        if (!Array.isArray(data)) {
+          console.error("Retorno inesperado do backend:", data);
+          return;
+        }
+
+        // FILTRAR PEDIDO ATIVO (status = "Em preparo")
+        const pedidoAtivoBackend = data.find(p => p.status === "Em preparo");
+        setPedidoAtivo(pedidoAtivoBackend || null);
+
+        // PEGAR ÚLTIMO PEDIDO FINALIZADO
+        const historico = data
+          .filter(p => p.status === "Finalizado")
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+
+        setHistoricoPedido(historico || null);
+
+      } catch (error) {
+        console.error("Erro ao carregar pedidos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPedidos();
+  }, []);
 
   const tituloPagina =
     activeTab === "acompanhamento" ? "Acompanhamento" : "Último pedido";
+
+  const hasPedidoAtivo = !!pedidoAtivo;
+  const hasHistorico = !!historicoPedido;
+
+  if (loading) {
+    return (
+      <PageWrapper>
+        <Container>
+          <TituloPagina>Carregando...</TituloPagina>
+        </Container>
+      </PageWrapper>
+    );
+  }
 
   return (
     <PageWrapper>
@@ -40,8 +74,16 @@ const Acompanhamento = () => {
             <PedidoStatus tipo="acompanhamento" pedido={pedidoAtivo} />
           )}
 
+          {activeTab === "acompanhamento" && !hasPedidoAtivo && (
+            <p>Você não tem pedidos em preparo no momento.</p>
+          )}
+
           {activeTab === "historico" && hasHistorico && (
             <PedidoStatus tipo="historico" pedido={historicoPedido} />
+          )}
+
+          {activeTab === "historico" && !hasHistorico && (
+            <p>Nenhum pedido encontrado no histórico.</p>
           )}
         </CaixaConteudo>
       </Container>
