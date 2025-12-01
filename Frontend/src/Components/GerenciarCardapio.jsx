@@ -114,7 +114,7 @@ const GerenciarCardapio = () => {
               <Label>Nome do produto</Label>
               <Input
                 type="text"
-                placeholder="Churro crocante recheado com brigadeiro"
+                placeholder="Digite o nome do seu produto..."
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 required
@@ -126,7 +126,7 @@ const GerenciarCardapio = () => {
               <Input
                 type="number"
                 step="0.01"
-                placeholder="R$ 15,00"
+                placeholder="Digite o valor, ex:R$ 15,00"
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
                 required
