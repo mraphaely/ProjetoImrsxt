@@ -63,7 +63,7 @@ function Carrinho() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/usuarios/comprar", {
+      const response = await fetch("http://localhost:3333/usuarios/comprar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -101,7 +101,7 @@ function Carrinho() {
         </div>
       ) : (
         <>
-          {/* FORMULÁRIO DO CLIENTE */}
+          
           <Card className="mb-4 p-3 shadow-sm">
             <h5 className="fw-bold mb-3">Dados do Cliente</h5>
 
@@ -136,7 +136,7 @@ function Carrinho() {
                 <Row className="gy-3 align-items-center">
                   <Col xs={12} sm={4} md={3} className="text-center">
                     <Image
-                      src={`http://localhost:3000/images/${item.imagem}`}
+                      src={`http://localhost:3333/images/${item.imagem}`}
                       alt={item.nome}
                       fluid
                       rounded

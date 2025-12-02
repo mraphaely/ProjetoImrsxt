@@ -34,7 +34,7 @@ conn
   .catch((error) => console.error("Erro ao conectar o banco:", error));
 
 
-app.use("/produtos", produtoRouter);   
+app.use("/produtos", produtoRouter, usuarioRouter);   
 app.use("/usuarios", usuarioRouter); 
 app.use("/admin", adminRouter, produtoRouter); 
 app.use("/config", configRouter);

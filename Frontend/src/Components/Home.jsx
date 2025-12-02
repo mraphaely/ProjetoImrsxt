@@ -9,7 +9,7 @@ const Cardapio = () => {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await axios.get("http://localhost:3333/produtos/listar");
+        const response = await axios.get("http://localhost:3333/produtos/");
         if (response.data && Array.isArray(response.data.eventos)) {
           setProdutos(response.data.eventos);
         } else {

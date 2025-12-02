@@ -19,7 +19,7 @@ const Acompanhamento = () => {
   useEffect(() => {
     const fetchPedidos = async () => {
       try {
-        const resposta = await fetch("http://localhost:3000/api/pedidos/historico");
+        const resposta = await fetch("http://localhost:3333/pedidos/historico");
         const data = await resposta.json();
 
         if (!Array.isArray(data)) {

@@ -29,7 +29,7 @@ const Pagamento = () => {
     }));
 
     try {
-      const response = await axios.post("http://localhost:3000/usuario/comprar", {
+      const response = await axios.post("http://localhost:3333/usuario/comprar", {
         nomeCliente: nome,
         telefone: telefone,
         itens: itensFormatados,
