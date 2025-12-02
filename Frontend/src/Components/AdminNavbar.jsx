@@ -53,7 +53,7 @@ const AdminNavbar = () => {
       </NavLeft>
 
       <NavRight>
-        <span style={{ fontSize: 14 }}>Churros & Cia</span>
+        <span style={{ fontSize: 18 }}>Churros & Cia</span>
         <LogoImg src={imgLogo} alt="Churros & Cia" />
         <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
       </NavRight>

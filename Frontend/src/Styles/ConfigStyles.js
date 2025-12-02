@@ -15,11 +15,11 @@ export const TabsWrapper = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 25px;
+  justify-content: space-around;
 
-  /* PERMITE QUEBRAR LINHA — RESOLVE O BOTÃO QUEBRANDO */
+  /* QUEBRA LINHA */
   flex-wrap: wrap;
 
-  /* centraliza nas telas pequenas */
   @media (max-width: 768px) {
     justify-content: center;
   }
@@ -28,7 +28,8 @@ export const TabsWrapper = styled.div`
 export const TabButton = styled.button`
   background: ${({ active }) => (active ? "linear-gradient(90deg, #ff8800, #cc2c1c)" : "#f3d8d2")};
   border: none;
-  padding: 10px 25px;
+  width: 30%;
+  padding: 13px;
   font-weight: 700;
   color: ${({ active }) => (active ? "#fff" : "#8a5c53")};
   cursor: pointer;

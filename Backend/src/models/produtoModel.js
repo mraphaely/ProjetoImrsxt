@@ -10,32 +10,19 @@ const Produto = conn.define("Produto", {
     nome: {
         type: DataTypes.STRING(100),
         allowNull: false,
-        validate: {
-            notEmpty: { msg: "O nome do produto é obrigatório." },
-        },
     },
     categoria: {
         type: DataTypes.STRING(100),
         allowNull: false,
-        validate: {
-            notEmpty: { msg: "A categoria é obrigatória." },
-        },
     },
     preco: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
-        validate: {
-            isDecimal: { msg: "O preço deve ser um número válido." },
-            min: { args: [0.01], msg: "O preço deve ser maior que zero." },
-        },
     },
     estoque: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            isInt: { msg: "O estoque deve ser um número inteiro." },
-            min: { args: [0], msg: "O estoque não pode ser negativo." },
-        },
+        defaultValue: 0,
     },
     descricao: {
         type: DataTypes.TEXT,
@@ -52,7 +39,7 @@ const Produto = conn.define("Produto", {
     },
 }, {
     tableName: "produtos",
-    timestamps: true, 
+    timestamps: true,
 });
 
 export default Produto;

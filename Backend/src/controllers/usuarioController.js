@@ -105,3 +105,16 @@ export const getHistoricoPedidos = async (request, response) => {
     return response.status(500).json({ message: "Erro ao buscar histórico de pedidos." });
   }
 };
+
+export const listarPedidos = async (request, response) => {
+  try {
+    const pedidos = await Pedido.findAll({
+      order: [["createdAt", "DESC"]],
+    });
+
+    response.json(pedidos);
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ message: "Erro ao buscar pedidos" });
+  }
+};

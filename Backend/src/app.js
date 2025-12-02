@@ -7,10 +7,12 @@ import conn from "./config/conn.js";
 import Produto from "./models/produtoModel.js"; 
 import Usuario from "./models/usuarioModel.js"; 
 import Admin from "./models/adminModel.js"; 
+import Config from "./models/configModel.js";
 
 import produtoRouter from "./routes/produtoRouter.js";  
 import usuarioRouter from "./routes/usuarioRouter.js";  
 import adminRouter from "./routes/adminRouter.js";
+import configRouter from "./routes/configRouter.js";
 
 const app = express();
 
@@ -34,7 +36,8 @@ conn
 
 app.use("/produtos", produtoRouter);   
 app.use("/usuarios", usuarioRouter); 
-app.use("/admin", adminRouter); 
+app.use("/admin", adminRouter, produtoRouter); 
+app.use("/config", configRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Rota não encontrada." });

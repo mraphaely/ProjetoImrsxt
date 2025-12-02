@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PageWrapper = styled.div`
   padding: 2.2rem 1.2rem;
-  min-height: calc(100vh - 80px); /* ajusta ao topo sticky */
+  min-height: calc(100vh - 80px); 
   box-sizing: border-box;
   background: #fff;
 `;
@@ -14,7 +14,7 @@ export const Title = styled.h2`
   font-size: 1.6rem;
 `;
 
-/* Card */
+
 export const PedidoCard = styled.div`
   border: 1.5px solid #e2b2a2;
   background: #fff8f2;
@@ -23,7 +23,6 @@ export const PedidoCard = styled.div`
   margin-bottom: 1.25rem;
 `;
 
-/* header e infos */
 export const PedidoHeader = styled.div`
   font-size: 1rem;
   margin-bottom: 0.45rem;
@@ -36,7 +35,6 @@ export const PedidoInfo = styled.div`
   margin-left: 2px;
 `;
 
-/* imagem do produto */
 export const ImgProduto = styled.img`
   width: 96px;
   height: 96px;
@@ -50,7 +48,6 @@ export const ImgProduto = styled.img`
   }
 `;
 
-/* area de botoes */
 export const PedidoFooter = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,6 +56,7 @@ export const PedidoFooter = styled.div`
 `;
 
 /* botões de status */
+/* botões de status */
 export const StatusBtn = styled.button`
   padding: 0.45rem 0.85rem;
   border-radius: 8px;
@@ -66,13 +64,17 @@ export const StatusBtn = styled.button`
   cursor: pointer;
   font-size: 0.86rem;
   color: #fff;
-  background: ${props => (props.entregue ? "#27ae60" : "#d94336")};
   transition: 0.12s;
 
-  &.nao {
-    background: #6b6b6b;
-  }
+  background: ${({ entregue, nao }) =>
+    entregue
+      ? "#27ae60"   /* verde quando entregue */
+      : nao
+        ? "#d94336" /* vermelho quando marcado como "Não entregue" */
+        : "#6b6b6b" /* cinza padrão antes de clicar */
+  };
 `;
+
 
 /* quando não há pedidos */
 export const EmptyBox = styled.div`
@@ -84,7 +86,6 @@ export const EmptyBox = styled.div`
   margin-bottom: 1.75rem;
 `;
 
-/* botao atualizar no topo direito */
 export const RefreshBtn = styled.button`
   position: absolute;
   right: 10%;
@@ -99,7 +100,6 @@ export const RefreshBtn = styled.button`
   }
 `;
 
-/* area de controles + totais */
 export const ControlsRow = styled.div`
   display:flex;
   justify-content:space-between;
@@ -108,7 +108,6 @@ export const ControlsRow = styled.div`
   flex-wrap: wrap;
 `;
 
-/* totais */
 export const FooterStats = styled.div`
   display:flex;
   gap: 0.75rem;

@@ -80,7 +80,7 @@ export const LogoutButton = styled.button`
   background: #fff;
   color: #d94336;
   border: 1px solid #f1cfc9;
-  padding: 6px 10px;
+  padding: 7px 18px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 700;

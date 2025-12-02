@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import {
   PageWrapper,
@@ -15,53 +16,43 @@ import {
   ControlsRow
 } from "../Styles/PedidoAdm";
 
-const RegistroPedidos = () => {
-  const [pedidos, setPedidos] = useState([
-    {
-      id: 1,
-      numero: "01",
-      data: "24/09/2025, 20:00",
-      cliente: "Allan Oliveira",
-      telefone: "(82) 98842-6467",
-      status: "Recebido",
-      valor: "14,00",
-      pagamento: "Débito",
-      entregue: false,
-      produto: "Churro com calda quente de chocolate",
-      imagem: "/img/churros1.png"
-    },
-    {
-      id: 2,
-      numero: "02",
-      data: "24/09/2025, 20:30",
-      cliente: "Eduarda Teixeira",
-      telefone: "(82) 98863-1814",
-      status: "Recebido",
-      valor: "15,00",
-      pagamento: "Crédito",
-      entregue: false,
-      produto: "Churro com calda de chocolate branco e raspas de limão",
-      imagem: "/img/churros2.png"
-    }
-  ]);
+const API = "http://localhost:3333/pedidos";
 
-  const marcarEntregue = (id) => {
-    setPedidos((prev) => prev.map(p => p.id === id ? { ...p, entregue: !p.entregue } : p));
+const RegistroPedidos = () => {
+  const [pedidos, setPedidos] = useState([]);
+
+  // Carregar pedidos do back
+  const fetchPedidos = async () => {
+    try {
+      const res = await axios.get(API);
+      setPedidos(res.data);
+    } catch (error) {
+      console.error("Erro ao carregar pedidos:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPedidos();
+  }, []);
+
+  // Atualizar status
+  const atualizarStatus = async (id, statusEntrega) => {
+    try {
+      await axios.put(`${API}/${id}/statusEntrega`, { statusEntrega });
+      fetchPedidos();
+    } catch (error) {
+      console.error("Erro ao atualizar entrega:", error);
+    }
   };
 
   const limparPedidos = () => setPedidos([]);
-
-  const refresh = () => {
-    // se integrar com backend, fetchPedidos();
-    console.log("Atualizar pedidos");
-  };
 
   return (
     <PageWrapper>
       <Container fluid>
         <div style={{ display: "flex", justifyContent: "center", position: "relative" }}>
           <Title>Pedidos do Dia</Title>
-          <RefreshBtn title="Atualizar pedidos" onClick={refresh}>
+          <RefreshBtn title="Atualizar pedidos" onClick={fetchPedidos}>
             ⟳
           </RefreshBtn>
         </div>
@@ -73,26 +64,31 @@ const RegistroPedidos = () => {
             <PedidoCard key={p.id}>
               <Row className="align-items-center">
                 <Col lg={9} md={8} sm={12}>
-                  <PedidoHeader><b>Nº Pedido: #{p.numero}</b> — {p.produto}</PedidoHeader>
+                  <PedidoHeader><b>Cliente:</b> {p.nomeCliente}</PedidoHeader>
+
                   <PedidoInfo>
-                    <div>Data: {p.data}</div>
-                    <div>Nome: {p.cliente}</div>
-                    <div>Número: {p.telefone}</div>
-                    <div>Status: {p.status}</div>
-                    <div>Valor: R$ {p.valor}</div>
-                    <div>Forma de Pagamento: {p.pagamento}</div>
+                    <div><b>Total:</b> R$ {p.valor_total}</div>
+                    <div><b>Pagamento:</b> {p.formaPagamento}</div>
+                    <div><b>Status:</b> {p.status}</div>
+                    <div><b>Telefone:</b> {p.telefone || "Não informado"}</div>
+                    <div><b>Itens:</b> {p.itens.map(i => i.nome).join(", ")}</div>
                   </PedidoInfo>
                 </Col>
 
                 <Col lg={3} md={4} sm={12} className="d-flex flex-column align-items-center">
-                  <ImgProduto src={p.imagem} alt={p.produto} />
                   <PedidoFooter>
-                    {p.entregue ? (
-                      <StatusBtn entregue onClick={() => marcarEntregue(p.id)}>Produto entregue ✔</StatusBtn>
+                    {p.statusEntrega === "entregue" ? (
+                      <StatusBtn entregue onClick={() => atualizarStatus(p.id, "nao-entregue")}>
+                        Entregue ✔
+                      </StatusBtn>
+                    ) : p.statusEntrega === "nao-entregue" ? (
+                      <StatusBtn nao onClick={() => atualizarStatus(p.id, "entregue")}>
+                        Não entregou ✖
+                      </StatusBtn>
                     ) : (
                       <>
-                        <StatusBtn onClick={() => marcarEntregue(p.id)}>Entregar</StatusBtn>
-                        <StatusBtn className="nao">Não entregue</StatusBtn>
+                        <StatusBtn onClick={() => atualizarStatus(p.id, "entregue")}>Entregar</StatusBtn>
+                        <StatusBtn nao onClick={() => atualizarStatus(p.id, "nao-entregue")}>Não entregar</StatusBtn>
                       </>
                     )}
                   </PedidoFooter>
@@ -103,14 +99,14 @@ const RegistroPedidos = () => {
         )}
 
         <ControlsRow className="mt-4">
-          <div>
-            <Button variant="outline-danger" onClick={limparPedidos}>Limpar pedidos</Button>
-          </div>
+          <Button variant="outline-danger" onClick={limparPedidos}>
+            Limpar pedidos
+          </Button>
 
           <FooterStats>
-            <span>Total de Pedidos: {pedidos.length}</span>
-            <span>Entregue: {pedidos.filter(p => p.entregue).length}</span>
-            <span>Não entregue: {pedidos.filter(p => !p.entregue).length}</span>
+            <span>Total: {pedidos.length}</span>
+            <span>Entregue: {pedidos.filter(p => p.statusEntrega === "entregue").length}</span>
+            <span>Não entregue: {pedidos.filter(p => p.statusEntrega === "nao-entregue").length}</span>
           </FooterStats>
         </ControlsRow>
       </Container>

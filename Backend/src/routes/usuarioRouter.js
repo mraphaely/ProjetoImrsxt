@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   getCardapio,
   finalizarCompra,
-  getHistoricoPedidos,
+  getHistoricoPedidos, listarPedidos
 } from "../controllers/usuarioController.js";
 
 const router = Router();
@@ -13,5 +13,7 @@ router.get("/cardapio", getCardapio);
 router.post("/comprar", finalizarCompra);
 
 router.get("/historico", getHistoricoPedidos);
+
+router.get("/", listarPedidos);
 
 export default router;
